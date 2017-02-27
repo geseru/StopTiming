@@ -58,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Device.cs" />
+    <Compile Include="DeviceSimulator.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="IDevice.cs" />
     <Compile Include="Model\TimeModel.cs" />
     <Compile Include="View\IMainForm.cs" />
     <Compile Include="View\Main.cs">
@@ -95,6 +97,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -10,9 +10,22 @@ using System.Threading.Tasks;
 
 namespace TimeSystem.View
 {
-    class PlotModel: OxyPlot.PlotModel  
+    /// <summary>
+    /// Model of oxyplot data
+    /// </summary>
+    /// <seealso cref="OxyPlot.PlotModel" />
+    class PlotModel : OxyPlot.PlotModel  
     {
-        StairStepSeries serie;
+        #region Fields
+        private StairStepSeries serie;
+        #endregion
+
+        #region Events        
+        /// <summary>
+        /// Ruler moved event
+        /// </summary>
+        public event System.Action RulerMoved;
+        #endregion
 
         public PlotModel()
         {
@@ -22,7 +35,8 @@ namespace TimeSystem.View
             Axes.Add(new LinearAxis
                         {
                             Position = AxisPosition.Bottom,
-                            Minimum = 0, TextColor = OxyColors.White,
+                            Minimum = 0,
+                            TextColor = OxyColors.White,
                             AxislineColor = OxyColors.White,
                             MajorGridlineColor =  OxyColors.White,
                             TicklineColor = OxyColors.White,
@@ -43,7 +57,7 @@ namespace TimeSystem.View
             serie.MarkerStrokeThickness = 2;
          
             Series.Add(serie);
-
+/*
             AddPoint(0.0, 0);
             AddPoint(10.2, 1);
             AddPoint(10.5, 0);
@@ -55,6 +69,7 @@ namespace TimeSystem.View
             AddPoint(15.0, 0);
 
             AddRulersToPulses();
+*/
         }
 
         public void AddRulersToPulses()
@@ -64,11 +79,13 @@ namespace TimeSystem.View
                 if (dp.Y == 1.0)
                     AddRuler(dp.X);
             }
+            InvalidatePlot(true);
         }
 
         public void AddPoint(double x, double y)
         {
             serie.Points.Add(new DataPoint(x, y));
+            InvalidatePlot(true);
         }
 
         public List<double> GetAllRulerPositions()
@@ -132,6 +149,9 @@ namespace TimeSystem.View
             ((LineAnnotation)sender).X = ((LineAnnotation)sender).InverseTransform(e.Position).X;
             InvalidatePlot(false);
             e.Handled = true;
+
+            if (RulerMoved != null)
+                RulerMoved();
         }
 
         private void La_MouseDown(object sender, OxyMouseDownEventArgs e)
