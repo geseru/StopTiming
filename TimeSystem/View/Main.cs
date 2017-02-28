@@ -48,6 +48,16 @@ namespace TimeSystem.View
         public event System.Action RulerMoved;
 
         /// <summary>
+        /// Occurs when [ruler added].
+        /// </summary>
+        public event System.Action<double> RulerAdded;
+
+        /// <summary>
+        /// Occurs when [ruler removed].
+        /// </summary>
+        public event System.Action<double> RulerRemoved;
+        
+        /// <summary>
         /// Occurs when [result changed].
         /// </summary>
         public event System.Action ResultChanged;
@@ -127,9 +137,32 @@ namespace TimeSystem.View
         {
             plotModel = new PlotModel();
             plotModel.RulerMoved += OnRulerMoved;
+            plotModel.MouseDoubleClicked += PlotModel_MouseDoubleClicked;
+            plotModel.RulerDoubleClicked += PlotModel_RulerDoubleClicked;
 
             this.plot.Model = plotModel;
             this.plot.Controller = null;
+        }
+
+        /// <summary>
+        /// Plots the model ruler double clicked.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void PlotModel_RulerDoubleClicked(double time)
+        {
+            if (RulerRemoved != null)
+                RulerRemoved(time);
+        }
+
+        /// <summary>
+        /// Plots the model mouse double clicked.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        private void PlotModel_MouseDoubleClicked(double time)
+        {
+            if (RulerAdded != null)
+                RulerAdded(time);
         }
 
         /// <summary>
@@ -280,6 +313,20 @@ namespace TimeSystem.View
         {
             changeGuard = true;
             results[index].Text = result;
+            changeGuard = false;
+        }
+
+        /// <summary>
+        /// Cleans the results.
+        /// </summary>
+        public void CleanResults()
+        {
+            changeGuard = true;
+            foreach (TextBox tb in results)
+                tb.Text = string.Empty;
+
+            foreach (ComboBox cb in ranks)
+                cb.Text = string.Empty;
             changeGuard = false;
         }
 

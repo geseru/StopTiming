@@ -38,6 +38,7 @@ namespace TimeSystem
             this.timeReader.TimeChanged += OnTimeChanged;
             this.timeReader.StopWatchChanged += OnStopWatchChanged;
             this.timeReader.Started += OnStarted;
+            timeModel = new TimeModel();
         }
 
         /// <summary>
@@ -112,6 +113,24 @@ namespace TimeSystem
         public List<Result> GetResults()
         {
             return timeModel.Results;
+        }
+
+        /// <summary>
+        /// Adds the result.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        public void AddResult(double time)
+        {
+            timeModel.AddResult(time);
+        }
+
+        /// <summary>
+        /// Removes the result.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        public void RemoveResult(double time)
+        {
+            timeModel.RemoveResult(time);
         }
     }
 }

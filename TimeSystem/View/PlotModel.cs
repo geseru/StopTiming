@@ -16,8 +16,21 @@ namespace TimeSystem.View
     /// <seealso cref="OxyPlot.PlotModel" />
     class PlotModel : OxyPlot.PlotModel  
     {
-        #region Fields
+        #region Fields        
+        /// <summary>
+        /// The serie
+        /// </summary>
         private StairStepSeries serie;
+
+        /// <summary>
+        /// The left axis
+        /// </summary>
+        private Axis leftAxis;
+
+        /// <summary>
+        /// The bottom axis
+        /// </summary>
+        private Axis bottomAxis;
         #endregion
 
         #region Events        
@@ -25,6 +38,16 @@ namespace TimeSystem.View
         /// Ruler moved event
         /// </summary>
         public event System.Action RulerMoved;
+
+        /// <summary>
+        /// Occurs when [mouse double clicked].
+        /// </summary>
+        public event System.Action<double> MouseDoubleClicked;
+
+        /// <summary>
+        /// Occurs when [ruler double clicked].
+        /// </summary>
+        public event System.Action<double> RulerDoubleClicked;
         #endregion
 
         public PlotModel()
@@ -32,23 +55,28 @@ namespace TimeSystem.View
             Background = OxyColors.Black;
             PlotAreaBorderColor = OxyColors.White;
             PlotAreaBorderThickness = new OxyThickness(1.0, 0.0, 0.0, 1.0);
-            Axes.Add(new LinearAxis
-                        {
-                            Position = AxisPosition.Bottom,
-                            Minimum = 0,
-                            TextColor = OxyColors.White,
-                            AxislineColor = OxyColors.White,
-                            MajorGridlineColor =  OxyColors.White,
-                            TicklineColor = OxyColors.White,
-                            FontWeight = 800.0
-                             
-            });
-            Axes.Add(new LinearAxis
-                        {
-                            Position = AxisPosition.Left,
-                            Minimum = -0.5, Maximum = 1.2,
-                            IsZoomEnabled = false
-            });
+            bottomAxis = new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = 0,
+                TextColor = OxyColors.White,
+                AxislineColor = OxyColors.White,
+                MajorGridlineColor = OxyColors.White,
+                TicklineColor = OxyColors.White,
+                FontWeight = 800.0
+
+            };
+            Axes.Add(bottomAxis);
+            leftAxis = new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Minimum = -0.5,
+                AbsoluteMinimum = -0.5,
+                Maximum = 1.2,
+                AbsoluteMaximum = 1.2,
+                IsZoomEnabled = false,
+            };
+            Axes.Add(leftAxis);
             // Add a line series
             serie = new StairStepSeries();
             serie.Color = OxyColors.SkyBlue;
@@ -57,21 +85,31 @@ namespace TimeSystem.View
             serie.MarkerStrokeThickness = 2;
          
             Series.Add(serie);
-/*
-            AddPoint(0.0, 0);
-            AddPoint(10.2, 1);
-            AddPoint(10.5, 0);
-     
-            AddPoint(10.75, 1);
-            AddPoint(11.2, 0);
-            AddPoint(12.4, 1);
-            AddPoint(13.0, 0);
-            AddPoint(15.0, 0);
 
-            AddRulersToPulses();
-*/
+            MouseDown += PlotModel_MouseDown;
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the PlotModel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="OxyMouseDownEventArgs"/> instance containing the event data.</param>
+        private void PlotModel_MouseDown(object sender, OxyMouseDownEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                DataPoint p = OxyPlot.Axes.Axis.InverseTransform(e.Position, bottomAxis, leftAxis);
+
+                AddRuler(p.X);
+                InvalidatePlot(false);
+                if (MouseDoubleClicked != null)
+                    MouseDoubleClicked(p.X);
+            }
+        }
+
+        /// <summary>
+        /// Adds the rulers to pulses.
+        /// </summary>
         public void AddRulersToPulses()
         {
             foreach (DataPoint dp in serie.Points)
@@ -82,12 +120,21 @@ namespace TimeSystem.View
             InvalidatePlot(true);
         }
 
+        /// <summary>
+        /// Adds the point.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
         public void AddPoint(double x, double y)
         {
             serie.Points.Add(new DataPoint(x, y));
             InvalidatePlot(true);
         }
 
+        /// <summary>
+        /// Gets all ruler positions.
+        /// </summary>
+        /// <returns>Return list of all ruler positions</returns>
         public List<double> GetAllRulerPositions()
         {
             List<double> rulerPositions = new List<double>();
@@ -99,6 +146,9 @@ namespace TimeSystem.View
             return rulerPositions;
         }
 
+        /// <summary>
+        /// Clears all.
+        /// </summary>
         public void ClearAll()
         {
             serie.Points.Clear();
@@ -112,6 +162,10 @@ namespace TimeSystem.View
             InvalidatePlot(false);
         }
 
+        /// <summary>
+        /// Adds the ruler.
+        /// </summary>
+        /// <param name="x">The x.</param>
         private void AddRuler(double x)
         {
             LineAnnotation lineAnnotation = new LineAnnotation();
@@ -124,10 +178,14 @@ namespace TimeSystem.View
             lineAnnotation.MouseDown += La_MouseDown;
             lineAnnotation.MouseMove += La_MouseMove;
             lineAnnotation.MouseUp += La_MouseUp;
-
+            
             Annotations.Add(lineAnnotation);
         }
 
+        /// <summary>
+        /// Removes the ruler.
+        /// </summary>
+        /// <param name="lineAnnotation">The line annotation.</param>
         private void RemoveRuler(LineAnnotation lineAnnotation)
         {
             int pos = Annotations.IndexOf(lineAnnotation);
@@ -137,6 +195,11 @@ namespace TimeSystem.View
             Annotations.Remove(lineAnnotation);
         }
 
+        /// <summary>
+        /// Handles the MouseUp event of the La control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="OxyMouseEventArgs"/> instance containing the event data.</param>
         private void La_MouseUp(object sender, OxyMouseEventArgs e)
         {
             ((LineAnnotation)sender).StrokeThickness /= 3;
@@ -144,6 +207,11 @@ namespace TimeSystem.View
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Handles the MouseMove event of the La control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="OxyMouseEventArgs"/> instance containing the event data.</param>
         private void La_MouseMove(object sender, OxyMouseEventArgs e)
         {
             ((LineAnnotation)sender).X = ((LineAnnotation)sender).InverseTransform(e.Position).X;
@@ -154,16 +222,31 @@ namespace TimeSystem.View
                 RulerMoved();
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the La control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="OxyMouseDownEventArgs"/> instance containing the event data.</param>
         private void La_MouseDown(object sender, OxyMouseDownEventArgs e)
         {
             LineAnnotation lineAnnotation = ((LineAnnotation)sender);
-            if (e.ChangedButton != OxyMouseButton.Left)
+            if (e.ClickCount == 2)
             {
-                return;
+                if (RulerDoubleClicked != null)
+                    RulerDoubleClicked(lineAnnotation.X);
+
+                Annotations.Remove(lineAnnotation);
             }
-                 
-            lineAnnotation.StrokeThickness *= 3;
-            
+            else
+            {
+                if (e.ChangedButton != OxyMouseButton.Left)
+                {
+                    return;
+                }
+
+                lineAnnotation.StrokeThickness *= 3;
+
+            }
             InvalidatePlot(false);
             e.Handled = true;
         } 

@@ -26,6 +26,14 @@ namespace TimeSystem.View
         /// </summary>
         event System.Action RulerMoved;
         /// <summary>
+        /// Occurs when [ruler removed].
+        /// </summary>
+        event System.Action<double> RulerRemoved;
+        /// <summary>
+        /// Occurs when [ruler added].
+        /// </summary>
+        event System.Action<double> RulerAdded;
+        /// <summary>
         /// Occurs when [result changed].
         /// </summary>
         event System.Action ResultChanged;
@@ -73,6 +81,11 @@ namespace TimeSystem.View
         /// <param name="index">The index.</param>
         /// <param name="result">The result.</param>
         void UpdateResult(int index, string result);
+
+        /// <summary>
+        /// Cleans the results.
+        /// </summary>
+        void CleanResults();
 
         /// <summary>
         /// Gets the result.

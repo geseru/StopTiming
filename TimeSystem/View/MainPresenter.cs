@@ -36,6 +36,9 @@ namespace TimeSystem.View
             this.mainForm.RulerMoved += OnRulerMoved;
             this.mainForm.ResultChanged += OnResultChanged;
             this.mainForm.RankChanged += OnRankChanged;
+            this.mainForm.RulerAdded += OnRulerAdded;
+            this.mainForm.RulerRemoved += OnRulerRemoved;
+
         }
 
 
@@ -54,6 +57,9 @@ namespace TimeSystem.View
             this.mainForm.RulerMoved -= OnRulerMoved;
             this.mainForm.ResultChanged -= OnResultChanged;
             this.mainForm.RankChanged -= OnRankChanged;
+            this.mainForm.RulerAdded -= OnRulerAdded;
+            this.mainForm.RulerRemoved -= OnRulerRemoved;
+
         }
         #endregion
 
@@ -124,6 +130,36 @@ namespace TimeSystem.View
             }
 
             timeManager.UpdateResults(results);
+        }
+
+        /// <summary>
+        /// Called when [ruler added].
+        /// </summary>
+        /// <param name="x">The x.</param>
+        private void OnRulerAdded(double x)
+        {
+            timeManager.AddResult(x);
+            List<Result> results = timeManager.GetResults();
+
+            mainForm.CleanResults();
+            for (int i = 0; i < results.Count; i++)
+            {
+                mainForm.UpdateResult(i, results[i].Time.ToString("N2"));
+                mainForm.UpdateRank(i, results[i].Rank.ToString());
+            }
+        }
+
+        private void OnRulerRemoved(double x)
+        {
+            timeManager.RemoveResult(x);
+            List<Result> results = timeManager.GetResults();
+
+            mainForm.CleanResults();
+            for (int i = 0; i < results.Count; i++)
+            {
+                mainForm.UpdateResult(i, results[i].Time.ToString("N2"));
+                mainForm.UpdateRank(i, results[i].Rank.ToString());
+            }
         }
 
         /// <summary>
