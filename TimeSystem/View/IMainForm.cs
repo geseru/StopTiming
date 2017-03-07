@@ -41,6 +41,10 @@ namespace TimeSystem.View
         /// Occurs when [position changed].
         /// </summary>
         event System.Action RankChanged;
+        /// <summary>
+        /// Occurs when [copy pressed].
+        /// </summary>
+        event System.Action CopyPressed;
         #endregion
 
         /// <summary>
@@ -113,5 +117,11 @@ namespace TimeSystem.View
         /// <param name="index">The index.</param>
         /// <param name="rank">The rank.</param>
         void UpdateRank(int index, string rank);
+
+        /// <summary>
+        /// Sets the time minimum.
+        /// </summary>
+        /// <param name="timeMin">The time minimum.</param>
+        void SetTimeMinimum(double timeMin);
     }
 }

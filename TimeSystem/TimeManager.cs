@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TimeSystem.Model;
 
 namespace TimeSystem
@@ -131,6 +132,34 @@ namespace TimeSystem
         public void RemoveResult(double time)
         {
             timeModel.RemoveResult(time);
+        }
+
+        /// <summary>
+        /// Copies the result to clipboard.
+        /// </summary>
+        public void CopyResultToClipboard()
+        {
+            string text = string.Empty;
+            int line = 1;
+
+            // Sort results by rank
+            List<Result> results = timeModel.Results.OrderBy(r => r.Rank).ToList();
+
+            foreach (Result result in results)
+            {
+                // Fill empty lines
+                while (line < result.Rank)
+                {
+                    text += System.Environment.NewLine;
+                    line++;
+                }
+
+                // add result 
+                text += result.Time.ToString("N2") + System.Environment.NewLine;
+                line++;
+            }
+
+            Clipboard.SetText(text);
         }
     }
 }

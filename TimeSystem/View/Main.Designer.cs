@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            OxyPlot.PlotModel plotModel2 = new OxyPlot.PlotModel();
+            OxyPlot.PlotModel plotModel1 = new OxyPlot.PlotModel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonStopp = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -61,6 +62,7 @@
             this.rank10 = new System.Windows.Forms.ComboBox();
             this.labelTimeResult = new System.Windows.Forms.Label();
             this.labelLine = new System.Windows.Forms.Label();
+            this.buttonCopy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -88,7 +90,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 144);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 194);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // buttonStopp
@@ -134,7 +136,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(781, 88);
+            this.panel1.Size = new System.Drawing.Size(781, 138);
             this.panel1.TabIndex = 0;
             // 
             // plot
@@ -142,52 +144,52 @@
             this.plot.BackColor = System.Drawing.Color.White;
             this.plot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plot.Location = new System.Drawing.Point(0, 0);
-            plotModel2.AxisTierDistance = 4D;
-            plotModel2.Culture = null;
-            plotModel2.DefaultColors = null;
-            plotModel2.DefaultFont = "Segoe UI";
-            plotModel2.DefaultFontSize = 12D;
-            plotModel2.IsLegendVisible = true;
-            plotModel2.LegendBorderThickness = 1D;
-            plotModel2.LegendColumnSpacing = 0D;
-            plotModel2.LegendFont = null;
-            plotModel2.LegendFontSize = 12D;
-            plotModel2.LegendFontWeight = 400D;
-            plotModel2.LegendItemAlignment = OxyPlot.HorizontalAlignment.Left;
-            plotModel2.LegendItemOrder = OxyPlot.LegendItemOrder.Normal;
-            plotModel2.LegendItemSpacing = 24D;
-            plotModel2.LegendLineSpacing = 0D;
-            plotModel2.LegendMargin = 8D;
-            plotModel2.LegendMaxHeight = double.NaN;
-            plotModel2.LegendMaxWidth = double.NaN;
-            plotModel2.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
-            plotModel2.LegendPadding = 8D;
-            plotModel2.LegendPlacement = OxyPlot.LegendPlacement.Inside;
-            plotModel2.LegendPosition = OxyPlot.LegendPosition.RightTop;
-            plotModel2.LegendSymbolLength = 16D;
-            plotModel2.LegendSymbolMargin = 4D;
-            plotModel2.LegendSymbolPlacement = OxyPlot.LegendSymbolPlacement.Left;
-            plotModel2.LegendTitle = null;
-            plotModel2.LegendTitleFont = null;
-            plotModel2.LegendTitleFontSize = 12D;
-            plotModel2.LegendTitleFontWeight = 700D;
-            plotModel2.PlotType = OxyPlot.PlotType.XY;
-            plotModel2.RenderingDecorator = null;
-            plotModel2.Subtitle = null;
-            plotModel2.SubtitleFont = null;
-            plotModel2.SubtitleFontSize = 14D;
-            plotModel2.SubtitleFontWeight = 400D;
-            plotModel2.Title = null;
-            plotModel2.TitleFont = null;
-            plotModel2.TitleFontSize = 18D;
-            plotModel2.TitleFontWeight = 700D;
-            plotModel2.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinPlotArea;
-            plotModel2.TitlePadding = 6D;
-            plotModel2.TitleToolTip = null;
-            this.plot.Model = plotModel2;
+            plotModel1.AxisTierDistance = 4D;
+            plotModel1.Culture = null;
+            plotModel1.DefaultColors = null;
+            plotModel1.DefaultFont = "Segoe UI";
+            plotModel1.DefaultFontSize = 12D;
+            plotModel1.IsLegendVisible = true;
+            plotModel1.LegendBorderThickness = 1D;
+            plotModel1.LegendColumnSpacing = 0D;
+            plotModel1.LegendFont = null;
+            plotModel1.LegendFontSize = 12D;
+            plotModel1.LegendFontWeight = 400D;
+            plotModel1.LegendItemAlignment = OxyPlot.HorizontalAlignment.Left;
+            plotModel1.LegendItemOrder = OxyPlot.LegendItemOrder.Normal;
+            plotModel1.LegendItemSpacing = 24D;
+            plotModel1.LegendLineSpacing = 0D;
+            plotModel1.LegendMargin = 8D;
+            plotModel1.LegendMaxHeight = double.NaN;
+            plotModel1.LegendMaxWidth = double.NaN;
+            plotModel1.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
+            plotModel1.LegendPadding = 8D;
+            plotModel1.LegendPlacement = OxyPlot.LegendPlacement.Inside;
+            plotModel1.LegendPosition = OxyPlot.LegendPosition.RightTop;
+            plotModel1.LegendSymbolLength = 16D;
+            plotModel1.LegendSymbolMargin = 4D;
+            plotModel1.LegendSymbolPlacement = OxyPlot.LegendSymbolPlacement.Left;
+            plotModel1.LegendTitle = null;
+            plotModel1.LegendTitleFont = null;
+            plotModel1.LegendTitleFontSize = 12D;
+            plotModel1.LegendTitleFontWeight = 700D;
+            plotModel1.PlotType = OxyPlot.PlotType.XY;
+            plotModel1.RenderingDecorator = null;
+            plotModel1.Subtitle = null;
+            plotModel1.SubtitleFont = null;
+            plotModel1.SubtitleFontSize = 14D;
+            plotModel1.SubtitleFontWeight = 400D;
+            plotModel1.Title = null;
+            plotModel1.TitleFont = null;
+            plotModel1.TitleFontSize = 18D;
+            plotModel1.TitleFontWeight = 700D;
+            plotModel1.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinPlotArea;
+            plotModel1.TitlePadding = 6D;
+            plotModel1.TitleToolTip = null;
+            this.plot.Model = plotModel1;
             this.plot.Name = "plot";
             this.plot.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plot.Size = new System.Drawing.Size(781, 88);
+            this.plot.Size = new System.Drawing.Size(781, 138);
             this.plot.TabIndex = 1;
             this.plot.Text = "plot1";
             this.plot.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -237,7 +239,7 @@
             this.buttonReady.Name = "buttonReady";
             this.buttonReady.Size = new System.Drawing.Size(100, 44);
             this.buttonReady.TabIndex = 3;
-            this.buttonReady.Text = "Ready";
+            this.buttonReady.Text = "Bereit";
             this.buttonReady.UseVisualStyleBackColor = false;
             this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
             // 
@@ -252,9 +254,9 @@
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(793, 520);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(793, 584);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -262,7 +264,7 @@
             this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Controls.Add(this.result1, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.result2, 0, 2);
@@ -286,9 +288,10 @@
             this.tableLayoutPanel3.Controls.Add(this.rank10, 1, 10);
             this.tableLayoutPanel3.Controls.Add(this.labelTimeResult, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.labelLine, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 153);
+            this.tableLayoutPanel3.Controls.Add(this.buttonCopy, 0, 11);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 203);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 11;
+            this.tableLayoutPanel3.RowCount = 12;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -301,7 +304,8 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(228, 344);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(255, 377);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // result1
@@ -446,7 +450,7 @@
             "10"});
             this.rank1.Location = new System.Drawing.Point(85, 35);
             this.rank1.Name = "rank1";
-            this.rank1.Size = new System.Drawing.Size(139, 24);
+            this.rank1.Size = new System.Drawing.Size(166, 24);
             this.rank1.TabIndex = 20;
             this.rank1.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -472,7 +476,7 @@
             "10"});
             this.rank2.Location = new System.Drawing.Point(85, 66);
             this.rank2.Name = "rank2";
-            this.rank2.Size = new System.Drawing.Size(139, 24);
+            this.rank2.Size = new System.Drawing.Size(166, 24);
             this.rank2.TabIndex = 21;
             this.rank2.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -498,7 +502,7 @@
             "10"});
             this.rank3.Location = new System.Drawing.Point(85, 97);
             this.rank3.Name = "rank3";
-            this.rank3.Size = new System.Drawing.Size(139, 24);
+            this.rank3.Size = new System.Drawing.Size(166, 24);
             this.rank3.TabIndex = 22;
             this.rank3.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -524,7 +528,7 @@
             "10"});
             this.rank4.Location = new System.Drawing.Point(85, 128);
             this.rank4.Name = "rank4";
-            this.rank4.Size = new System.Drawing.Size(139, 24);
+            this.rank4.Size = new System.Drawing.Size(166, 24);
             this.rank4.TabIndex = 23;
             this.rank4.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -550,7 +554,7 @@
             "10"});
             this.rank5.Location = new System.Drawing.Point(85, 159);
             this.rank5.Name = "rank5";
-            this.rank5.Size = new System.Drawing.Size(139, 24);
+            this.rank5.Size = new System.Drawing.Size(166, 24);
             this.rank5.TabIndex = 24;
             this.rank5.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -576,7 +580,7 @@
             "10"});
             this.rank6.Location = new System.Drawing.Point(85, 190);
             this.rank6.Name = "rank6";
-            this.rank6.Size = new System.Drawing.Size(139, 24);
+            this.rank6.Size = new System.Drawing.Size(166, 24);
             this.rank6.TabIndex = 25;
             this.rank6.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -602,7 +606,7 @@
             "10"});
             this.rank7.Location = new System.Drawing.Point(85, 221);
             this.rank7.Name = "rank7";
-            this.rank7.Size = new System.Drawing.Size(139, 24);
+            this.rank7.Size = new System.Drawing.Size(166, 24);
             this.rank7.TabIndex = 26;
             this.rank7.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -628,7 +632,7 @@
             "10"});
             this.rank8.Location = new System.Drawing.Point(85, 252);
             this.rank8.Name = "rank8";
-            this.rank8.Size = new System.Drawing.Size(139, 24);
+            this.rank8.Size = new System.Drawing.Size(166, 24);
             this.rank8.TabIndex = 27;
             this.rank8.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -654,7 +658,7 @@
             "10"});
             this.rank9.Location = new System.Drawing.Point(85, 283);
             this.rank9.Name = "rank9";
-            this.rank9.Size = new System.Drawing.Size(139, 24);
+            this.rank9.Size = new System.Drawing.Size(166, 24);
             this.rank9.TabIndex = 28;
             this.rank9.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -680,7 +684,7 @@
             "10"});
             this.rank10.Location = new System.Drawing.Point(85, 314);
             this.rank10.Name = "rank10";
-            this.rank10.Size = new System.Drawing.Size(139, 24);
+            this.rank10.Size = new System.Drawing.Size(166, 24);
             this.rank10.TabIndex = 29;
             this.rank10.SelectedIndexChanged += new System.EventHandler(this.rank_SelectedIndexChanged);
             // 
@@ -709,20 +713,40 @@
             this.labelLine.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.labelLine.Location = new System.Drawing.Point(85, 1);
             this.labelLine.Name = "labelLine";
-            this.labelLine.Size = new System.Drawing.Size(139, 30);
+            this.labelLine.Size = new System.Drawing.Size(166, 30);
             this.labelLine.TabIndex = 31;
             this.labelLine.Text = "Bahn";
             this.labelLine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // buttonCopy
+            // 
+            this.buttonCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCopy.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel3.SetColumnSpan(this.buttonCopy, 2);
+            this.buttonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCopy.Location = new System.Drawing.Point(1, 342);
+            this.buttonCopy.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonCopy.Name = "buttonCopy";
+            this.buttonCopy.Size = new System.Drawing.Size(253, 34);
+            this.buttonCopy.TabIndex = 32;
+            this.buttonCopy.Text = "In Zwischenablage kopieren";
+            this.buttonCopy.UseVisualStyleBackColor = false;
+            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(793, 520);
+            this.ClientSize = new System.Drawing.Size(793, 584);
             this.Controls.Add(this.tableLayoutPanel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(809, 616);
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "Zeitmessug";
             this.Load += new System.EventHandler(this.Main_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -768,6 +792,7 @@
         private System.Windows.Forms.ComboBox rank10;
         private System.Windows.Forms.Label labelTimeResult;
         private System.Windows.Forms.Label labelLine;
+        private System.Windows.Forms.Button buttonCopy;
     }
 }
 

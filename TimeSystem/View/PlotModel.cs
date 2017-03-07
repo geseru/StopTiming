@@ -249,6 +249,16 @@ namespace TimeSystem.View
             }
             InvalidatePlot(false);
             e.Handled = true;
-        } 
+        }
+
+        /// <summary>
+        /// Sets the time minimum.
+        /// </summary>
+        /// <param name="timeMin">The time minimum.</param>
+        public void SetTimeMinimum(double timeMin)
+        {
+            bottomAxis.Minimum = timeMin;
+            InvalidatePlot(false);
+        }
     }
 }

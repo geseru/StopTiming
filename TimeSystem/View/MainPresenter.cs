@@ -38,7 +38,7 @@ namespace TimeSystem.View
             this.mainForm.RankChanged += OnRankChanged;
             this.mainForm.RulerAdded += OnRulerAdded;
             this.mainForm.RulerRemoved += OnRulerRemoved;
-
+            this.mainForm.CopyPressed += OnCopyPressed;
         }
 
 
@@ -59,6 +59,7 @@ namespace TimeSystem.View
             this.mainForm.RankChanged -= OnRankChanged;
             this.mainForm.RulerAdded -= OnRulerAdded;
             this.mainForm.RulerRemoved -= OnRulerRemoved;
+            this.mainForm.CopyPressed -= OnCopyPressed;
 
         }
         #endregion
@@ -93,6 +94,9 @@ namespace TimeSystem.View
                 mainForm.UpdateResult(i, results[i].Time.ToString("N2"));
                 mainForm.UpdateRank(i, results[i].Rank.ToString());
             }
+
+            if (results.Count > 0)
+                mainForm.SetTimeMinimum(results[0].Time - 0.5);
         }
 
         /// <summary>
@@ -165,17 +169,9 @@ namespace TimeSystem.View
         /// <summary>
         /// Called when [result changed].
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private void OnResultChanged()
         {
-            double doubleValue;
-            List<string> resultTexts = mainForm.GetResults();
-            List<double> resultValues = new List<double>();
-
-            for (int i = 0; i < resultTexts.Count; i++)
-                if (double.TryParse(resultTexts[i], out doubleValue))
-                    resultValues.Add(doubleValue);
-            
+            List<double> resultValues = ConvertResults(mainForm.GetResults());
             List<string> ranks = mainForm.GetRanks();
             List<Result> results = new List<Result>();
 
@@ -190,11 +186,34 @@ namespace TimeSystem.View
         /// <summary>
         /// Called when [rank changed].
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private void OnRankChanged()
         {
-            List<string> positions = mainForm.GetRanks();
-            throw new NotImplementedException();
+            OnResultChanged();
+        }
+
+        /// <summary>
+        /// Converts the results from string to double.
+        /// </summary>
+        /// <param name="resultTexts">The result texts.</param>
+        /// <returns>Return a list of results as double values</returns>
+        private List<double> ConvertResults(List<string> resultTexts)
+        {
+            double doubleValue;
+            List<double> resultValues = new List<double>();
+
+            for (int i = 0; i < resultTexts.Count; i++)
+                if (double.TryParse(resultTexts[i], out doubleValue))
+                    resultValues.Add(doubleValue);
+
+            return resultValues;
+        }
+
+        /// <summary>
+        /// Called when [copy pressed].
+        /// </summary>
+        private void OnCopyPressed()
+        {
+            timeManager.CopyResultToClipboard();
         }
         #endregion
     }

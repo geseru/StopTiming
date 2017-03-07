@@ -66,6 +66,11 @@ namespace TimeSystem.View
         /// Occurs when [position changed].
         /// </summary>
         public event System.Action RankChanged;
+
+        /// <summary>
+        /// Occurs when [copy pressed].
+        /// </summary>
+        public event System.Action CopyPressed;
         #endregion
 
         #region Properties
@@ -341,6 +346,26 @@ namespace TimeSystem.View
             ranks[index].Text = rank;
             changeGuard = false;
 
+        }
+
+        /// <summary>
+        /// Handles the Click event of the buttonCopy control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void buttonCopy_Click(object sender, EventArgs e)
+        {
+            if (CopyPressed != null)
+                CopyPressed();
+        }
+
+        /// <summary>
+        /// Sets the time minimum.
+        /// </summary>
+        /// <param name="timeMin">The time minimum.</param>
+        public void SetTimeMinimum(double timeMin)
+        {
+            plotModel.SetTimeMinimum(timeMin);
         }
         #endregion
     }
