@@ -17,8 +17,8 @@ namespace TimeSystem
 
         public Factory()
         {
-            //           IDevice device = new Device();
-            IDevice device = new DeviceSimulator();
+            IDevice device = new Device();
+//            IDevice device = new DeviceSimulator();
             TimeReader timeReader = new TimeReader(device);
             timeManager = new TimeManager(timeReader);
 

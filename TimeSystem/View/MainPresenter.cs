@@ -70,6 +70,7 @@ namespace TimeSystem.View
         /// </summary>
         private void OnReadyClicked()
         {
+            mainForm.CleanAll();
             timeManager.ReadyToStart();
         }
 
@@ -153,6 +154,10 @@ namespace TimeSystem.View
             }
         }
 
+        /// <summary>
+        /// Called when [ruler removed].
+        /// </summary>
+        /// <param name="x">The x.</param>
         private void OnRulerRemoved(double x)
         {
             timeManager.RemoveResult(x);

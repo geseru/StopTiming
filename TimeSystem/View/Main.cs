@@ -199,6 +199,7 @@ namespace TimeSystem.View
         {
             if (ReadyClicked != null)
                 ReadyClicked();
+            plotModel.ZoomData();
         }
 
         /// <summary>
@@ -210,6 +211,7 @@ namespace TimeSystem.View
         {
             if (StopClicked != null)
                 StopClicked();
+            plotModel.ZoomData();
         }
 
         /// <summary>
@@ -316,6 +318,8 @@ namespace TimeSystem.View
         /// <param name="result">The result.</param>
         public void UpdateResult(int index, string result)
         {
+            if (index >= results.Count)
+                return;
             changeGuard = true;
             results[index].Text = result;
             changeGuard = false;
@@ -336,12 +340,23 @@ namespace TimeSystem.View
         }
 
         /// <summary>
+        /// Cleans all.
+        /// </summary>
+        public void CleanAll()
+        {
+            CleanResults();
+            plotModel.ClearAll();
+        }
+
+        /// <summary>
         /// Updates the rank.
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="rank">The rank.</param>
         public void UpdateRank(int index, string rank)
         {
+            if (index >= ranks.Count)
+                return;
             changeGuard = true;
             ranks[index].Text = rank;
             changeGuard = false;

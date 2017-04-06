@@ -58,12 +58,13 @@ namespace TimeSystem.View
             bottomAxis = new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-                Minimum = 0,
+                Minimum = 0.0,
                 TextColor = OxyColors.White,
                 AxislineColor = OxyColors.White,
                 MajorGridlineColor = OxyColors.White,
                 TicklineColor = OxyColors.White,
-                FontWeight = 800.0
+                FontWeight = 800.0,
+                MaximumPadding = 0.1
 
             };
             Axes.Add(bottomAxis);
@@ -259,6 +260,16 @@ namespace TimeSystem.View
         {
             bottomAxis.Minimum = timeMin;
             InvalidatePlot(false);
+        }
+
+        /// <summary>
+        /// Zooms the data that everthing is visible
+        /// </summary>
+        public void ZoomData()
+        {
+            bottomAxis.Minimum = 0.0;
+            bottomAxis.Reset();
+            InvalidatePlot(true);
         }
     }
 }

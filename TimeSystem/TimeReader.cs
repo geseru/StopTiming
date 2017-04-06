@@ -52,6 +52,8 @@ namespace TimeSystem
         public Action<StopWatchObject> StopWatchChanged;
 
         private bool readyToStart;
+        private bool startCommandLast;
+        private bool photoCellLast;
 
         /// <summary>
         /// Gets or sets a value indicating whether [ready to start].
@@ -79,6 +81,7 @@ namespace TimeSystem
         public TimeReader(IDevice device)
         {
             readyToStart = false;
+            startCommandLast = false;
             worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
@@ -120,6 +123,8 @@ namespace TimeSystem
         public void Stop()
         {
             watch.Reset();
+            startCommandLast = false;
+            photoCellLast = true;
         }
 
         /// <summary>
@@ -173,11 +178,8 @@ namespace TimeSystem
         {
             int counter =0;
             BackgroundWorker worker = sender as BackgroundWorker;
-
-            bool startCommandLast = false;
+            
             bool startCommand;
-
-            bool photoCellLast = false;
             bool photoCell;
             do
             {
@@ -189,6 +191,7 @@ namespace TimeSystem
                         watch.Start();
                         counter = 0;
                         worker.ReportProgress(0, new StopWatchObject(0.0, false));
+                        photoCellLast = true;
                     }
                     startCommandLast = startCommand;
                 }
@@ -201,7 +204,7 @@ namespace TimeSystem
                         worker.ReportProgress(0, new StopWatchObject((double)(watch.ElapsedMilliseconds / 1000.0), photoCell));
 
                     // Time message to show the running clock (100ms)
-                    if (counter >= 10)
+                    if (counter >= 100)
                     {
                         counter = 0;
                         worker.ReportProgress(0, new TimeObject((double)(watch.ElapsedMilliseconds / 1000.0)));
@@ -216,7 +219,7 @@ namespace TimeSystem
                     break;
                 }
                 // Perform a time consuming operation and report progress.
-                System.Threading.Thread.Sleep(10);
+                System.Threading.Thread.Sleep(1);
                 counter++;
             } while (e.Cancel == false);
         }

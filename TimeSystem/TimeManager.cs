@@ -40,6 +40,8 @@ namespace TimeSystem
             this.timeReader.StopWatchChanged += OnStopWatchChanged;
             this.timeReader.Started += OnStarted;
             timeModel = new TimeModel();
+
+            this.timeReader.Connect();
         }
 
         /// <summary>
@@ -88,6 +90,7 @@ namespace TimeSystem
         public void ReadyToStart()
         {
             timeReader.ReadyToStart = true;
+            timeModel.CleanAll();
         }
 
         /// <summary>

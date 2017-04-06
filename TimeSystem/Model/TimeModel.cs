@@ -111,5 +111,11 @@ namespace TimeSystem.Model
             timeResults.Clear();
             timeResults.AddRange(resultList);
         }
+
+        public void CleanAll()
+        {
+            timeResults.Clear();
+            timePoints.Clear();
+        }
     }
 }

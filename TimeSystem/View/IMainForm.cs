@@ -123,5 +123,10 @@ namespace TimeSystem.View
         /// </summary>
         /// <param name="timeMin">The time minimum.</param>
         void SetTimeMinimum(double timeMin);
+        
+        /// <summary>
+        /// Cleans all.
+        /// </summary>
+        void CleanAll();
     }
 }

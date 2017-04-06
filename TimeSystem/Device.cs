@@ -64,10 +64,10 @@ namespace TimeSystem
         private void Initialize()
         {
             // Set pin 1 (with index 0) as digital input
-            myDevice.SetPinData(PIN_START, (byte)PoKeysDevice_DLL.ePinCap.digitalInput);
+            myDevice.SetPinData(PIN_START, (byte)PoKeysDevice_DLL.ePinCap.digitalInput + (byte)(PoKeysDevice_DLL.ePinCap.invertPin));
 
             // Set pin 2 (with index 1) as digital input
-            myDevice.SetPinData(PIN_PHOTO_CELL, (byte)PoKeysDevice_DLL.ePinCap.digitalInput);
+            myDevice.SetPinData(PIN_PHOTO_CELL, (byte)PoKeysDevice_DLL.ePinCap.digitalInput /*+ (byte)(PoKeysDevice_DLL.ePinCap.invertPin)*/);
         }
 
         /// <summary>
