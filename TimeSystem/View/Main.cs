@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TimeSystem.View
@@ -117,6 +111,16 @@ namespace TimeSystem.View
             results.Add(result8);
             results.Add(result9);
             results.Add(result10);
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
+            results.Add(new TextBox());
 
             ranks = new List<ComboBox>();
             ranks.Add(rank1);
@@ -129,6 +133,16 @@ namespace TimeSystem.View
             ranks.Add(rank8);
             ranks.Add(rank9);
             ranks.Add(rank10);
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
+            ranks.Add(new ComboBox());
         }
         #endregion
 
@@ -274,7 +288,8 @@ namespace TimeSystem.View
         {
             List<string> rankList = new List<string>();
             for (int i = 0; i < ranks.Count; i++)
-                rankList.Add(ranks[i].Text);
+                if (!string.IsNullOrEmpty(ranks[i].Text))
+                    rankList.Add(ranks[i].Text);
 
             return rankList;
         }

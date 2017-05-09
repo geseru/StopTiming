@@ -97,7 +97,7 @@ namespace TimeSystem
             Random rnd = new Random();
             randomTimes.Clear();
 
-            randomTimes.Add(8.0 + rnd.NextDouble());
+            randomTimes.Add(4.0 + rnd.NextDouble());
             randomTimes.Add(randomTimes[0] + 0.25);
 
             randomTimes.Add(randomTimes[1] + rnd.NextDouble());
@@ -108,6 +108,30 @@ namespace TimeSystem
 
             randomTimes.Add(randomTimes[5] + rnd.NextDouble());
             randomTimes.Add(randomTimes[6] + 0.23);
+
+            randomTimes.Add(randomTimes[7] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[8] + 0.23);
+
+            randomTimes.Add(randomTimes[9] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[10] + 0.23);
+
+            randomTimes.Add(randomTimes[11] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[12] + 0.23);
+
+            randomTimes.Add(randomTimes[13] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[14] + 0.23);
+
+            randomTimes.Add(randomTimes[15] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[16] + 0.23);
+
+            randomTimes.Add(randomTimes[17] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[18] + 0.23);
+
+            randomTimes.Add(randomTimes[19] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[20] + 0.23);
+
+            randomTimes.Add(randomTimes[21] + rnd.NextDouble());
+            randomTimes.Add(randomTimes[22] + 0.23);
         }
     }
 }

@@ -104,6 +104,8 @@ namespace TimeSystem.Model
                 if (timeResults[i].Time == timeResult)
                     timeResults.RemoveAt(i);
             }
+            for (int i = 0; i < timeResults.Count(); i++)
+                timeResults[i].Rank = i + 1;
         }
 
         public void UpdateResults(List<Result> resultList)
