@@ -49,7 +49,7 @@ namespace TimeSystem
         /// </summary>
         public void OnStarted()
         {
-            timeModel = new TimeModel();
+            timeModel.CleanAll();
             timeModel.AddTimePoint(new TimePoint(0.0, false));
         }
 

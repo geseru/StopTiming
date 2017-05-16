@@ -54,7 +54,7 @@ namespace TimeSystem
         private bool readyToStart;
         private bool startCommandLast;
         private bool photoCellLast;
-
+ 
         /// <summary>
         /// Gets or sets a value indicating whether [ready to start].
         /// </summary>
@@ -200,14 +200,14 @@ namespace TimeSystem
                     photoCell = device.ReadPhotoCell();
 
                     // Photo cell sensor value changed
-                    if (photoCellLast != photoCell)
-                        worker.ReportProgress(0, new StopWatchObject((double)(watch.ElapsedMilliseconds / 1000.0), photoCell));
+                    if (photoCellLast != photoCell && watch.ElapsedMilliseconds > 0)
+                        worker.ReportProgress(1, new StopWatchObject((double)(watch.ElapsedMilliseconds / 1000.0), photoCell));
 
                     // Time message to show the running clock (100ms)
                     if (counter >= 100)
                     {
                         counter = 0;
-                        worker.ReportProgress(0, new TimeObject((double)(watch.ElapsedMilliseconds / 1000.0)));
+                        worker.ReportProgress(2, new TimeObject((double)(watch.ElapsedMilliseconds / 1000.0)));
                     }
 
                     photoCellLast = photoCell;
