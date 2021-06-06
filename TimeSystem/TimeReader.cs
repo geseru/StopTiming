@@ -176,11 +176,13 @@ namespace TimeSystem
         /// <param name="e">The <see cref="DoWorkEventArgs"/> instance containing the event data.</param>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            int reads = 0;
             int counter =0;
             BackgroundWorker worker = sender as BackgroundWorker;
             
             bool startCommand;
             bool photoCell;
+
             do
             {
                 if (!watch.IsRunning && readyToStart)
@@ -194,23 +196,34 @@ namespace TimeSystem
                         photoCellLast = true;
                     }
                     startCommandLast = startCommand;
+ 
                 }
                 else if (watch.IsRunning)
                 {
                     photoCell = device.ReadPhotoCell();
 
+                    double elapsedInSec = (double)(watch.ElapsedMilliseconds / 1000.0);
+#if DEBUG
+                    reads++;
+                    if (reads % 100 == 0)
+                        Debug.WriteLine("Anzahl Lesebefehle: " + reads + "   R/s = " + reads / elapsedInSec);
+#endif
                     // Photo cell sensor value changed
-                    if (photoCellLast != photoCell && watch.ElapsedMilliseconds > 0)
-                        worker.ReportProgress(1, new StopWatchObject((double)(watch.ElapsedMilliseconds / 1000.0), photoCell));
+                    if (photoCellLast != photoCell && elapsedInSec > 0)
+                        worker.ReportProgress(1, new StopWatchObject(elapsedInSec, photoCell));
 
                     // Time message to show the running clock (100ms)
-                    if (counter >= 100)
+                    if (counter >= 6)
                     {
                         counter = 0;
-                        worker.ReportProgress(2, new TimeObject((double)(watch.ElapsedMilliseconds / 1000.0)));
+                        worker.ReportProgress(2, new TimeObject(elapsedInSec));
                     }
 
                     photoCellLast = photoCell;
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(1);
                 }
                 
                 if (worker.CancellationPending == true)
@@ -218,8 +231,7 @@ namespace TimeSystem
                     e.Cancel = true;
                     break;
                 }
-                // Perform a time consuming operation and report progress.
-                System.Threading.Thread.Sleep(1);
+
                 counter++;
             } while (e.Cancel == false);
         }
